@@ -8,13 +8,15 @@ const serverHandle = function (req, res) {
     const route = url.parse(req.url)
     const path = route.pathname 
     const params = qs.parse(url.parse(req.url).query);
-    params['name']='henry';
+    //params['name']='henry';
+
 
     res.writeHead(200, {'Content-Type': 'text/html'});
-    if (path === '/hello' && 'name' in params) {
+    if (path === '/hello' && 'name' in params && params['name']==='Pm') {
         res.write('Hello ' + params['name'])
+        res.write('Pm is an engineer student at ECE Paris. He is in 4th years. He used to work with Henry and he likes pumpkin.')
     } else {
-        res.write('Hello anonymous')
+       res.status(404).send('Not Found');
     }
     console.log(params);
     res.end();
