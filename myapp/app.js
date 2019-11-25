@@ -10,10 +10,11 @@ const serverHandle = function (req, res) {
     const params = qs.parse(route.query);
 
     res.writeHead(200, {'Content-Type': 'text/html'});
-    if (path === '/hello' && 'name' in params) {
+    if (path === '/hello' && 'name' in params && params['name']==='Pm') {
         res.write('Hello ' + params['name'])
+        res.write('Pm is an engineer student at ECE Paris. He is in 4th years. He used to work with Henry and he likes pumpkin.');
     } else {
-        res.write('Hello anonymous')
+        res.write('404 Error Not Found');
     }
     console.log(params);
     res.end();
