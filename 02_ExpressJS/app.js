@@ -1,23 +1,20 @@
-// import module
-const http = require('http');
-const url = require('url')
-const qs = require('querystring')
+express = require('express')
+app = express()
 
-const serverHandle = function (req, res) {
-    // Retrieve and print the queryParams
-    const route = url.parse(req.url);
-    const path = route.pathname;
-    const params = qs.parse(route.query);
+app.set('port', 3000)
 
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    if (path === '/hello' && 'name' in params) {
-        res.write('Hello ' + params['name'])
-    } else {
-        res.write('Hello anonymous')
-    }
-    console.log(params);
-    res.end();
-}
+app.get('/', function (req, res) {
+    res.send('hey please put a name on params')
+})
 
-const server = http.createServer(serverHandle);
-server.listen(3000); // start he server
+app.get('/:name', 
+    (req, res) => res.render('hello.ejs', {name: req.params.name})
+)
+
+app.set('views', __dirname + "/view")
+app.set('view engine', 'ejs');
+  
+app.listen(
+    app.get('port'), 
+    () => console.log(`server listening on ${app.get('port')}`)
+)
