@@ -5,11 +5,9 @@ const qs = require('querystring')
 
 const serverHandle = function (req, res) {
     // Retrieve and print the queryParams
-    const route = url.parse(req.url)
-    const path = route.pathname 
-    const params = qs.parse(url.parse(req.url).query);
-    //params['name']='henry';
-
+    const route = url.parse(req.url);
+    const path = route.pathname;
+    const params = qs.parse(route.query);
 
     res.writeHead(200, {'Content-Type': 'text/html'});
     if (path === '/hello' && 'name' in params && params['name']==='Pm') {
@@ -21,7 +19,6 @@ const serverHandle = function (req, res) {
     console.log(params);
     res.end();
 }
-
 
 const server = http.createServer(serverHandle);
 server.listen(3000); // start he server
