@@ -12,9 +12,9 @@ const serverHandle = function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     if (path === '/hello' && 'name' in params && params['name']==='Pm') {
         res.write('Hello ' + params['name'])
-        res.write('Pm is an engineer student at ECE Paris. He is in 4th years. He used to work with Henry and he likes pumpkin.')
+        res.write('Pm is an engineer student at ECE Paris. He is in 4th years. He used to work with Henry and he likes pumpkin.');
     } else {
-       res.status(404).send('Not Found');
+        res.write('404 Error Not Found');
     }
     console.log(params);
     res.end();
